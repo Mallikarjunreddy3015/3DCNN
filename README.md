@@ -22,3 +22,10 @@ Original paper citation:
       Title = {FeatureNet: Machining feature recognition based on 3D Convolution Neural Network},
       Year = {2018}
     }
+
+    @article{tensorflow2featurenet,
+      Author = {Andrew R Colligan},
+      Title = {Tensorflow 2 FeatureNet},
+      Journal = {https://gitlab.com/qub_femg/machine-learning/featurenet-tensorflow-2},
+      Year = {2021}
+}

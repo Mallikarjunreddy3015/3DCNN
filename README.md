@@ -6,16 +6,14 @@ The code is based on this original [paper](https://www.sciencedirect.com/science
 ![featurenet_network](imgs/featurenet.png)
 
 ## Requirements
-- Python
-- Tensorflow
-- Numpy
-- h5py
+- Python > 3.8.5
+- Tensorflow > 2.2.0
+- Numpy > 1.19.1
+- h5py > 1.10.6
 - Binvox <sup>(Opensource software)</sup>
 
 
 ## Citation
-Original paper citation:
-
     @article{featurenet2018,
       Author = {Zhibo Zhang, PrakharJaiswal, Rahul Rai},
       Journal = {Computer-Aided Design},
@@ -23,9 +21,9 @@ Original paper citation:
       Year = {2018}
     }
 
-    @article{tensorflow2featurenet,
+    @article{featurenettensorflow2,
       Author = {Andrew R Colligan},
-      Title = {Tensorflow 2 FeatureNet},
+      Title = {FeatureNet Tensorflow 2},
       Journal = {https://gitlab.com/qub_femg/machine-learning/featurenet-tensorflow-2},
       Year = {2021}
 }

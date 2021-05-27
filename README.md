@@ -26,4 +26,7 @@ The code is based on this original [paper](https://www.sciencedirect.com/science
       Title = {FeatureNet Tensorflow 2},
       Journal = {https://gitlab.com/qub_femg/machine-learning/featurenet-tensorflow-2},
       Year = {2021}
-}
+    }
+
+## Funding
+Funding was provided by DfE.

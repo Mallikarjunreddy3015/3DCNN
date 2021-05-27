@@ -2,7 +2,6 @@ import tensorflow as tf
 import numpy as np
 from network import FeatureNet
 from utils.dataloader import dataloader_h5 as dataloader
-from utils.dataloader import read_voxel_from_binvox
 import time
 
 
@@ -21,30 +20,21 @@ def test_step(x, y):
     return y_true, y_pred
 
 
-def test_step_no_labels(x, y):
+def test_step_no_labels(x):
     test_logits = model(x, training=False)
-
     y_pred = np.argmax(test_logits.numpy(), axis=1)
 
     return y_pred
 
 
 if __name__ == '__main__':
-    # Parameters to Set
+    # User Parameters
     num_classes = 24
-    num_epochs = 100
     test_set_path = "data_single_feat/test.h5"
     checkpoint_path = "checkpoint/featurenet_date_2020-12-12.ckpt"
-    learning_rate = 0.001
-
-    decay_rate = learning_rate / num_epochs
-    lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(learning_rate,
-                                                                 decay_steps=100000, decay_rate=decay_rate)
 
     model = FeatureNet(num_classes=num_classes)
-
-    optimizer = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
-
+    optimizer = tf.keras.optimizers.Adam()
     loss_fn = tf.keras.losses.CategoricalCrossentropy()
 
     test_loss_metric = tf.keras.metrics.Mean()

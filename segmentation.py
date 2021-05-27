@@ -115,27 +115,21 @@ def display_machining_feature(index, count):
 
 
 if __name__ == '__main__':
-    # Parameters to Set
-    resolution = 64
+    # User Parameters
+    num_classes = 24
+    voxel_resolution = 64
     binvox_path = "data/438.binvox"
     checkpoint_path = "checkpoint/featurenet_date_2020-12-12.ckpt"
-    num_classes = 24
-    num_epochs = 100
-    learning_rate = 0.001
-
-    decay_rate = learning_rate / num_epochs
-    lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(learning_rate,
-                                                                 decay_steps=100000, decay_rate=decay_rate)
 
     with open(binvox_path, "rb") as f:
         model = binvox_rw.read_as_3d_array(f)
     voxel = model.data
-    #display_voxel(voxel, "grey")
+    #display_voxel(voxel, "grey") # Display voxel model
 
     features = decomp_and_segment(voxel)
 
     model = FeatureNet(num_classes=num_classes)
-    optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
+    optimizer = tf.keras.optimizers.Adam()
     loss_fn = tf.keras.losses.CategoricalCrossentropy()
 
     model.load_weights(checkpoint_path)
@@ -143,7 +137,7 @@ if __name__ == '__main__':
     for i, feature in enumerate(features):
         input = zero_centering_norm(feature)
         x = tf.Variable(input, dtype=tf.float32)
-        x = tf.reshape(x, [1, 1, resolution, resolution, resolution])
+        x = tf.reshape(x, [1, 1, voxel_resolution, voxel_resolution, voxel_resolution])
         y_pred = test_step(x)
         display_machining_feature(y_pred, i)
         #display_voxel(feature, "grey")

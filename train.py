@@ -1,3 +1,4 @@
+import time
 import tensorflow as tf
 import datetime as dt
 from network import FeatureNet
@@ -26,14 +27,13 @@ def val_step(x, y):
 
 
 if __name__ == '__main__':
-    import time
-
+    # User Parameters
     num_classes = 24
     num_epochs = 100
+    learning_rate = 0.001
     training_set_path = "data_single_feat/train.h5"
     val_set_path = "data_single_feat/val.h5"
 
-    learning_rate = 0.001
     decay_rate = learning_rate / num_epochs
     lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(learning_rate,
                                                                  decay_steps=100000, decay_rate=decay_rate)

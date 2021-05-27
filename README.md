@@ -15,7 +15,8 @@ The code is based on this original [paper](https://www.sciencedirect.com/science
 ## Usage
 ### Dataset
 - To create voxel models, CAD models be converted to **.stl** format. These must have the following naming convertion "{class_num}-{index_num}" e.g. 0-100.stl.
-- The **binvox** .exe must be placed in the dataset directory with the stl files. A shell script is provided to convert all the stls called **convert_to_voxel.sh**, this must also be placed in the directory.
+- The **binvox** .exe must be placed in the dataset directory with the stl files. A shell script is provided in */utils* to convert all the stls called **convert_to_voxel.sh**, this must also be placed in the directory. Below is an example of running the shell script for voxel models of resolution 64^3.
+- `$ ./convert_to_voxel.sh 64`
 - An additional shell script **convert_to_voxel.sh** is also provided that will rotate the voxel model to create additional samples.
 - The voxel models are split into training/validation/test subsets and batches are created then stored in h5df files. These h5df files are what are loaded during training and testing. This dataset split can be achieved by running **create_dataset_splits.py**.
 

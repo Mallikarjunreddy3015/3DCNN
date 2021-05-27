@@ -1,6 +1,5 @@
 import tensorflow as tf
 import numpy as np
-from sklearn.metrics import classification_report
 from network import FeatureNet
 from utils.dataloader import dataloader_h5 as dataloader
 from utils.dataloader import read_voxel_from_binvox
@@ -31,11 +30,13 @@ def test_step_no_labels(x, y):
 
 
 if __name__ == '__main__':
+    # Parameters to Set
     num_classes = 24
-    num_epochs = 50
-    dropout_rate = 0.5
-
+    num_epochs = 100
+    test_set_path = "data_single_feat/test.h5"
+    checkpoint_path = "checkpoint/featurenet_date_2020-12-12.ckpt"
     learning_rate = 0.001
+
     decay_rate = learning_rate / num_epochs
     lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(learning_rate,
                                                                  decay_steps=100000, decay_rate=decay_rate)
@@ -51,8 +52,8 @@ if __name__ == '__main__':
     test_precision_metric = tf.keras.metrics.Precision()
     test_recall_metric = tf.keras.metrics.Recall()
 
-    model.load_weights("checkpoint/featurenet_date_2020-12-12.ckpt")
-    test_dataloader = dataloader("data/Real_World/Voxels/real_dataset_1.binvox")
+    model.load_weights(checkpoint_path)
+    test_dataloader = dataloader(test_set_path)
 
     y_true_total = []
     y_pred_total = []

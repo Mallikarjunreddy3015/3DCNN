@@ -1,5 +1,4 @@
 import tensorflow as tf
-import numpy as np
 import datetime as dt
 from network import FeatureNet
 from utils.dataloader import dataloader_h5
@@ -31,6 +30,8 @@ if __name__ == '__main__':
 
     num_classes = 24
     num_epochs = 100
+    training_set_path = "data_single_feat/train.h5"
+    val_set_path = "data_single_feat/val.h5"
 
     learning_rate = 0.001
     decay_rate = learning_rate / num_epochs
@@ -60,8 +61,8 @@ if __name__ == '__main__':
         print(f"Epoch {epoch + 1} of {num_epochs}")
         start_time = time.time()
 
-        train_dataloader = dataloader_h5("data_single_feat/train.h5")
-        val_dataloader = dataloader_h5("data_single_feat/val.h5")
+        train_dataloader = dataloader_h5(training_set_path)
+        val_dataloader = dataloader_h5(val_set_path)
 
         with summary_writer.as_default():
             for step, (x_batch_train, y_batch_train) in enumerate(train_dataloader):

@@ -70,14 +70,10 @@ def test_h5(split):
         x = np.array(group.get("x"), dtype=np.float32)
         y = np.array(group.get("y"), dtype=np.int8)
 
-        #if int(y) == 17:
-            #del hf[key]
-
         print(f"Group: {group}")
         print(f"X: {np.shape(x)}")
         print(f"Y: {y}")
 
-        #labels[int(y)] += 1
 
     hf.close()
 

@@ -111,7 +111,7 @@ def display_voxel(voxels):
 
 if __name__ == '__main__':
     # Parameters to set
-    main_dir = "data_single_feat/stl/"
+    main_dir = "/home/mlg/Documents/Andrew/msvnet/data/64/"
     batch_size = 40
     voxel_resolution = 64
     normalize = True

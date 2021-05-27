@@ -2,7 +2,8 @@ import tensorflow as tf
 import numpy as np
 from sklearn.metrics import classification_report
 from network import FeatureNet
-from utils.dataloader import dataloader_h5
+from utils.dataloader import dataloader_h5 as dataloader
+from utils.dataloader import read_voxel_from_binvox
 import time
 
 
@@ -19,6 +20,14 @@ def test_step(x, y):
     test_recall_metric.update_state(y, test_logits)
 
     return y_true, y_pred
+
+
+def test_step_no_labels(x, y):
+    test_logits = model(x, training=False)
+
+    y_pred = np.argmax(test_logits.numpy(), axis=1)
+
+    return y_pred
 
 
 if __name__ == '__main__':
@@ -43,7 +52,7 @@ if __name__ == '__main__':
     test_recall_metric = tf.keras.metrics.Recall()
 
     model.load_weights("checkpoint/featurenet_date_2020-12-12.ckpt")
-    test_dataloader = dataloader_h5("data_single_feat/test.h5")
+    test_dataloader = dataloader("data/Real_World/Voxels/real_dataset_1.binvox")
 
     y_true_total = []
     y_pred_total = []

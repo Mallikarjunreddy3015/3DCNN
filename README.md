@@ -12,7 +12,6 @@ The code is based on this original [paper](https://www.sciencedirect.com/science
 - h5py > 1.10.6
 - scipy > 1.5.2
 - scikit-image > 0.17.2
-- scikit-learn > 0.23.2
 - matplotlib > 3.3.2
 - Binvox <sup>(Opensource software)</sup>
 

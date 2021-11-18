@@ -49,6 +49,7 @@ The code is based on this original [paper](https://www.sciencedirect.com/science
       Journal = {https://gitlab.com/qub_femg/machine-learning/featurenet-tensorflow-2},
       Year = {2021}
     }
+    @article{Segmentation code from: https://github.com/PeizhiShi/MsvNet}
 
 ## Funding
 Funding was provided by DfE.

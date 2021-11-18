@@ -10,6 +10,7 @@ from skimage import measure
 
 
 def get_seg_samples(labels):
+    """Ref: https://github.com/PeizhiShi/MsvNet"""
     samples = np.zeros((0, labels.shape[0], labels.shape[1], labels.shape[2]))
 
     for i in range(1, np.max(labels.astype(int)) + 1):
@@ -27,6 +28,7 @@ def get_seg_samples(labels):
 
 
 def decomp_and_segment(sample):
+    """Ref: https://github.com/PeizhiShi/MsvNet"""
     blobs = ~sample
     final_labels = np.zeros(blobs.shape)
     all_labels = measure.label(blobs)

@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import h5py
 import random
 import utils.binvox_rw as binvox_rw
+from mpl_toolkits.mplot3d import Axes3D
+import plotly.graph_objects as go
 
 
 def write_batches_for_split(split_name, sample_keys, resolution, norm):
@@ -48,11 +50,12 @@ def read_h5(split):
               16: 0, 17: 0, 18: 0, 19: 0, 20: 0, 21: 0, 22: 0, 23: 0}
 
     for key in list(hf.keys()):
-        group = hf.get(key)
-        x = np.array(group.get("x"), dtype=np.float32)
-        y = np.array(group.get("y"), dtype=np.int8)
+        with h5py.File('filename.h5', 'r') as f:
+    # # Load the 'x' and 'y' datasets from the file
+         x = np.array(f['group/x'], dtype=np.float32)
+         y = np.array(f['group/y'], dtype=np.int8)
 
-        print(f"Group: {group}")
+        print(f"Group: {f}")
         print(f"X: {np.shape(x)}")
         print(f"Y: {y}")
 
@@ -102,10 +105,18 @@ def zero_centering_norm(voxels):
 
 
 def display_voxel(voxels):
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-    ax.voxels(voxels, edgecolor='k')
-    plt.show()
+    fig = go.Figure(data=go.Volume(
+        x=voxels[:, :, :, 0],
+        y=voxels[:, :, :, 1],
+        z=voxels[:, :, :, 2],
+        value=voxels[:, :, :, 3],
+        isomin=0,
+        isomax=1,
+        opacity=0.1,
+        surface_count=21,
+        ))
+    fig.show()
+
 
 
 if __name__ == '__main__':

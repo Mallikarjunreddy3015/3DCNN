@@ -15,10 +15,13 @@ def write_batch_h5_file(dataset_file, split_name, sample_keys, resolution):
     hf_split = h5py.File(file_name, 'a')
 
     for key in sample_keys:
-        group = hf.get(key)
-        x = np.array(group.get("x"), dtype=np.float32)
-        y = np.array(group.get("y"), dtype=np.int8)
-
+    #     group = hf.get(key)
+    #     x = np.array(group.get("x"), dtype=np.float32)
+    #     y = np.array(group.get("y"), dtype=np.int8)
+        with h5py.File('filename.h5', 'r') as f:
+    # # Load the 'x' and 'y' datasets from the file
+         x = np.array(f['group/x'], dtype=np.float32)
+         y = np.array(f['group/y'], dtype=np.int8)
         batch[batch_idx, :, :, :, :] = x
         batch_idx += 1
         labels.append(y)
@@ -66,11 +69,12 @@ def test_h5(split):
               16: 0, 17: 0, 18: 0, 19: 0, 20: 0, 21: 0, 22: 0, 23: 0}
 
     for key in list(hf.keys()):
-        group = hf.get(key)
-        x = np.array(group.get("x"), dtype=np.float32)
-        y = np.array(group.get("y"), dtype=np.int8)
-
-        print(f"Group: {group}")
+        
+        with h5py.File('filename.h5', 'r') as f:
+    # # Load the 'x' and 'y' datasets from the file
+         x = np.array(f['group/x'], dtype=np.float32)
+         y = np.array(f['group/y'], dtype=np.int8)
+        print(f"Group: {f}")
         print(f"X: {np.shape(x)}")
         print(f"Y: {y}")
 

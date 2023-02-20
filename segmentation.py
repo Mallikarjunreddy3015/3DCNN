@@ -29,7 +29,7 @@ def get_seg_samples(labels):
 
 
 def decomp_and_segment(sample):
-    """Ref: https://github.com/PeizhiShi/MsvNet"""
+   
     blobs = ~sample
     final_labels = np.zeros(blobs.shape)
     all_labels = measure.label(blobs)
@@ -87,22 +87,6 @@ def display_voxel(voxels, color):
     plt.axis('off')
     plt.show()
 
-
-# def display_features(features):
-#     color_code = {0: "red", 1: "blue", 2: "green", 3: "orange",
-#                   4: "grey", 5: "yellow", 6: "pink", 7: "purple"}
-#     unique, counts = np.unique(features, return_counts=True)
-#     colors = np.empty(features.shape, dtype=object)
-
-#     for i in range(len(unique)):
-#         colors[np.where(features == unique[i], True, False)] = color_code[i]
-
-#     fig = plt.figure()
-#     ax = fig.add_subplot(111, projection='3d')
-#     ax.voxels(features, facecolors=colors)
-#     plt.grid(b=None)
-#     plt.axis('off')
-#     plt.show()
 
 def display_features(features):
     color_code = {0: "red", 1: "blue", 2: "green", 3: "orange",

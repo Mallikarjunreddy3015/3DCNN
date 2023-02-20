@@ -29,7 +29,7 @@ def write_batches_for_split(split_name, sample_keys, resolution, norm):
 
         if batch_idx == batch_size:
             print(f"Batch Num: {num_of_batches}")
-            group = hf.create_group(str(num_of_batches))
+            group = hf.create_group(" " +str(num_of_batches))
             cad_names = np.array(names, dtype="S")
             group.create_dataset("names", data=cad_names, compression="lzf")
             group.create_dataset("x", data=batch, compression="lzf")
@@ -89,13 +89,15 @@ def read_voxel_from_binvox(filepath, normalize=True):
     if normalize:
         voxel = zero_centering_norm(voxel)
 
-    filename = filepath.split("/")[-1]
+    filename = filepath.split("\\")[-1]
     label = filename.split("_")[0]
-    #label = int(filename.split("-")[0])
-    if label.isdigit():
-       label = np.array(label, dtype=np.int8)
-    voxel = np.array(voxel, dtype=np.float32)
-   
+    if  label.isdigit():
+     voxel = np.array(voxel, dtype=np.float32)
+     label = np.array(label, dtype=np.int8)
+    
+
+
+    
 
     return voxel, label
 
@@ -128,9 +130,13 @@ if __name__ == '__main__':
     normalize = True
     dataset_split = {"train": 0.7, "val": 0.15, "test": 0.15}
 
-   
+    
     list_of_files = glob.glob(main_dir + "*.binvox")
-
+    x=1
+    for f in list_of_files:
+        x+=1
+        print(x,f)
+        
     train_samples, val_samples, test_samples = split_dataset(dataset_split, list_of_files)
 
     print("Train")

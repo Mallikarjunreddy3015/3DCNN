@@ -31,8 +31,8 @@ if __name__ == '__main__':
     num_classes = 24
     num_epochs = 100
     learning_rate = 0.001
-    training_set_path = "/train.h5"
-    val_set_path = "/val.h5"
+    training_set_path = "train.h5"
+    val_set_path = "val.h5"
 
     decay_rate = learning_rate / num_epochs
     lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(learning_rate,

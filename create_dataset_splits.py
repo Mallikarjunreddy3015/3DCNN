@@ -90,11 +90,12 @@ def read_voxel_from_binvox(filepath, normalize=True):
         voxel = zero_centering_norm(voxel)
 
     filename = filepath.split("/")[-1]
-    #label = int(filename.split("_")[0])
-    label = int(filename.split("-")[0])
-
+    label = filename.split("_")[0]
+    #label = int(filename.split("-")[0])
+    if label.isdigit():
+       label = np.array(label, dtype=np.int8)
     voxel = np.array(voxel, dtype=np.float32)
-    label = np.array(label, dtype=np.int8)
+   
 
     return voxel, label
 
@@ -121,18 +122,13 @@ def display_voxel(voxels):
 
 if __name__ == '__main__':
     # Parameters to set
-    main_dir = "/home/mlg/Documents/Andrew/msvnet/data/64/"
+    main_dir = "C:/Users/reddy/Desktop/VISHALBTP/Dataset/"
     batch_size = 40
     voxel_resolution = 64
     normalize = True
     dataset_split = {"train": 0.7, "val": 0.15, "test": 0.15}
 
-    """
-    list_of_files = []
-    for i in os.listdir(main_dir):
-        sub_dir = main_dir + i + "/"
-        list_of_files.extend(glob.glob(sub_dir + "*.binvox"))
-    """
+   
     list_of_files = glob.glob(main_dir + "*.binvox")
 
     train_samples, val_samples, test_samples = split_dataset(dataset_split, list_of_files)
